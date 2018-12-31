@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <ul>
+      <li data-id="1" data-user-job="programmer">zero</li>
+      <li data-id="2" data-user-job="designer">nero</li>
+      <li data-id="3" data-user-job="programmer">hero</li>
+      <li data-id="4" data-user-job="ceo">kero</li>
+  </ul>
+  <script>
+      console.log(document.querySelector('li').dataset);
+      //{id:'1' ,userJob:'programmer'}
+  </script>
+</body>
+</html>
+<!-- 
+1.HTML 태그 속성으로 data- 시작하는것들을 넣어줌
+2.이들이 data attribute 임
+3.data-id ,data-user-job 
+4.화면에 나타나지는 않지만 웹 애플리케이션 구동에 필요한 데이터임
+5.data attribute의 장점은 자바스크립트로 쉽게 접근할 수 있음 
+6.script 태그를 보면 dataset 속성을 통해 첫번째 li 태그의 data attribute에 접근하고 있음
+7.단 data attribute이름이 조금 씩 변형됨
+8.data- 앞에 접두어는 사라지고 -뒤에 위치한 글자는 대문자가 됨 , data-id 는 id , data-user-job는 userJob 이 됨
+9.반대로 dataset 에 데이터를 넣어도 HTML태그에 반영됨 dataset.monthSalary=10000;을 넣으면 data-month-salary="10000" 이라는 속성이 생김
+10.실습 예제에서 data attribute 자주쓰게 되니 기억해야함 
+ -->
