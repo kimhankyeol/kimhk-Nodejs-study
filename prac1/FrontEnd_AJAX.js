@@ -42,10 +42,12 @@ var data = {
     birth : 1994
 };
 xhr3.onreadystatechange = function(){
-    if(xhr3.status===200||xhr3.status===201){//성공
-        console.log(xhr3.responseText);
-    }else{//실패
-        console.error(xhr3.responseText);
+    if(xhr.readyState === xhr.DONE){
+        if(xhr3.status===200||xhr3.status===201){//성공
+            console.log(xhr3.responseText);
+        }else{//실패
+            console.error(xhr3.responseText);
+        }
     }
 }
 xhr3.open('POST','https://www.zerocho.com/api/post/json');
