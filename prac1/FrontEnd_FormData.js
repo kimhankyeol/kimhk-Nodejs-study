@@ -25,10 +25,12 @@ formData2.append('name','김한결');
 formData2.append('age','28');
 
 xhr.onreadystatechange = function(){
-    if(xhr.readyState===200||xhr.readyState===201){//성공
-        console.log(xhr.responseText);
-    }else{//실패
-        console.log(xhr.responseText);
+    if(xhr.readyState === xhr.DONE){
+        if(xhr.readyState===200||xhr.readyState===201){//성공
+            console.log(xhr.responseText);
+        }else{//실패
+            console.log(xhr.responseText);
+        }
     }
 }
 
