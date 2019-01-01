@@ -1,4 +1,4 @@
-//m이상 n이하 무작위 정수 반환
+//m이상 n이하 무작위 정수 반환 ㅋㅋ
 function rand(m,n){
     return m+Math.floor((n-m+1)*Math.random());
     //Math.floor((n-m+1)*Math.random());  Math.random 0< <1 난수를 꺼냄
