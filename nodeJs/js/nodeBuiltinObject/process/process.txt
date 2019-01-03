@@ -1,0 +1,46 @@
+아직까지는 process객체를 사용할 일이 많지 않았지만 책을 공부하면서 후반에 갈수록 사용할 일이 늘어남
+
+process 객체는 현재 실행되고 있는 노드 프로세스에 대한 정보를 담고 있음
+process 객체 안에는 다양한 속성이 있는데, REPL에 하나씩 따라서 입력해봄
+
+결과값은 사용자의 컴퓨터마다 차이가 있을수 있음
+
+node 
+process.version //설치된 노드의 버전
+process.arch //프로세스 아키텍처 정보 
+process.platform //운영체제 플랫폼
+process.pid //현재 프로세스의 아이디 . 프로세스를 여러개 가질떄 구분 할 수 있음
+process.uptime() //프로세스가 시작된후 흐른 시간
+process.execPath //노드의 경로
+process.cwd() //현재 프로세스가 실행되는위치
+process.cpuUsage() //현재 cpu 사용량
+
+
+이 정보들은 사용빈도는 그리 높지 않지만 일반적으로 운영체제  실행환경별 다른동작을 하고 싶을때 사용 
+
+중요!!!
+process.env 와 process.nextTick,process.exit() 중요함
+1.process.env
+REPL에 process.env 입력하면 매우 많은 정보 출력 
+자세히 보면 이 정보들이 시스템의 환경변수
+process.env 는 서비스의 중요한 키를 저장하는 공간으로 사용됨
+서버나 데이터베이스의 비밀번호와 각종 API 키를 코드에 직접 입력하는것은 위험 혹여 서비스가 해킹당해 코드가 유출되었을때 비밀번호가 코드에 남아있어 추가피해가 발생할수 있음
+
+따라서 중요한 비밀번호는 다음과 같이 process.env의 속성으로 대체함
+
+const secretId = process.env.SECRET_ID;
+const secretCode = process.env.SECRET_CODE;
+
+process.env에 직접 SECRET_ID와 SECRET_CODE를 넣어주면 됨
+넣는 방법은 운영체제마다 다 차이가 있음 
+하지만 한 번에 모든 운영체제에 동일하게 넣을 수 있는 방법이 있음 
+dotenv를 사용하면됨
+
+2.process.nextTick(콜백)
+이벤트 루프가 다른 콜백 함수들보다 nextTick의 콜백 함수를 우선으로 처리하도록 만듬!!!!!
+
+nextTick.js 참조
+
+3.process.exit 
+
+exit.js 참조
