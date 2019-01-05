@@ -27,14 +27,3 @@ console.log('url.parse():',parsedUrl);
 
 // url.format  WHATWG방식의 url 과 기존 노드의 url 모드 사용할 수 있음  /   분해되었던 url 객체를 다시 원래 상태로 조립함
 console.log('url.format():',url.format(parsedUrl));
-
-/*
-WHATWG와 노드의 url 취향에 따라 사용되지만 노드의 url 형식을 사용해야 하는경우가 있음
- 주소가 host 부분 없이  pathname 부분만 오는 경우 (/book/bookList.apsx) , WHATWG 방식은 이 주소를 처리 할 수 없음
- 나중에 배우면 서버를 만들때 host 부분없이 pathname 만 오는 주소를 보게됨
-
- WHATWG 방식은 search 부분을 searchParams라는 특수한 객체로 반환하므로 유용함
- search부분은 보통 주소를 통해 데이터를 전달할 때 사용함 
- search는 물음표(?)로 시작하고 그 뒤에 키 = 값 형식으로 데이터를 전달함
- 여러 키가 있을때는 &로 구분함
-*/
