@@ -44,6 +44,8 @@ const parseCookies = (cookie='') =>
 http.createServer((req,res)=>{
     const cookies = parseCookies(req.headers.cookie);
 
+    console.log(cookies);
+
    
     //////////////////////////////////////////////////////1번의 경우
     // /login으로 요청이 시작될 경우  url 과 querystring 모듈로 각각 주소와 주소에 딸려오는 query를 분석함

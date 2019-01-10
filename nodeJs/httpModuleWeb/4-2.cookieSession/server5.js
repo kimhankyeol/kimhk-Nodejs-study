@@ -16,6 +16,7 @@ const parseCookies = (cookie = '')=>
         const session = {};
         
 http.createServer((req,res)=>{
+ 
     const cookies = parseCookies(req.headers.cookie);
     if(req.url.startsWith('/login')){
         const {query} = url.parse(req.url);
@@ -25,13 +26,14 @@ http.createServer((req,res)=>{
         const expires = new Date();
         expires.setMinutes(expires.getMinutes()+5); 
         const randomInt = +new Date();
+        console.log("randomInt"+randomInt);
         session[randomInt] = {
             name,
             expires
         };
         res.writeHead(302,{
             Location:'/',
-            'Set-Cookie':`session=${randomInt}; Expires=${expires.toGMTString()}; HttpOnly;Path=/`
+            'Set-Cookie':`session=${randomInt}; Expires=${expires.toGMTString()};HttpOnly;Path=/`
         });
         res.end();
     }else if(cookies.session && session[cookies.session].expires>new Date()){
