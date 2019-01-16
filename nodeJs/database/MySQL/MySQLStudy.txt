@@ -1,0 +1,140 @@
+﻿mysql
+설치할때 비번 oracle 통일 
+
+이고 
+안에서는 아이디 superdev 
+비번  admin
+
+우리는 superdev 데이터 베이스 만들거임
+
+create database  superdev;
+use  superdev;
+select host,user,password from user;
+
+2. 사용자 추가
+create user 'superdev'@'localhost' identified by 'admin';
+%외부접근 
+localhost 내부접근  
+외부접근이  되는 사용자 계정
+superdev 
+admin 
+생성함
+
+3.사용자 삭제
+drop user 'userID';
+delete from user where user = 'userID';
+
+4. 권한부여
+show grants (접속한 사용자)
+show grants for userID@'%';   --userID와host까지 붙여서 검색해야 함.
+
+
+
+ 1)추가
+grant all privileges on *.* to 'superdev'@'%';
+사용자에게 모든 DB 모든 테이블에 모든 권한 부여(거의 루트계정)
+
+grant all privileges on DBname.* to 'userID'@'%';
+사용자에게 특정 DB에 대한 모든 권한 부여.
+
+grant select, insert, update on DBname.* to 'userID'@'%';
+사용자에게 특정 DB에 대한 select,insert,update 권한 부여.
+
+FLUSH PRIVILEGES; (권한 적용)
+
+만약에 권한 추가 명령어에 identified by 'userpassword' 넣어서 실행을 하면
+비밀번호도 변경됨.
+
+grant all privileges on *.* to 'userID'@'%' identified by 'userpassword';
+
+2)삭제
+
+revoke all on DBname from userID;
+사용자에게 모든 권한 삭제.
+
+
+create database DB명;
+
+
+
+
+
+1.데이터 베이스 접속하기
+mysql -u 사용자명 -p 데이터베이스이름
+mysql -u root (계정과 비번을 만들지 않았을때)
+mysql -u root -p(루트 비번이 있을때)
+
+2.데이터베이스 추가 
+mysqladmin -u root -p create 데이터베이스명
+
+3.루트 계정비밀번호 바꾸기
+mysqladmin -u root -p password 새비밀번호
+mysqladmin -u root password 비밀번호(비밀번호를 처음 설정시)
+
+4.사용자추가 및 권한 설정
+사용자계정:abc , 사용자 패스워드:1234
+
+접속 : mysql -u root -p
+mysql> USE mysql;
+
+mysql> INSERT INTO user (Host, User, Password) VALUES ('localhost', '계정아이디', password('비밀번호'));
+mysql> INSERT INTO user (Host, User, Password) VALUES ('%', '계정아이디', password('비밀번호'));
+mysql> FLUSH privileges;
+계정이 생성되었다면, 그 계정이 접근할 수 있는 데이터베이스를 생성하고 권한을 부여해야 합니다.
+
+mysql> CREATE DATABASE 데이터베이스명;
+mysql> GRANT ALL privileges ON 데이터베이스명.* TO 계정아이디@locahost IDENTIFIED BY '비밀번호';
+mysql> GRANT ALL privileges ON 데이터베이스명.* TO 계정아이디@'%' IDENTIFIED BY '비밀번호';
+
+5.테이블 생성
+create table test;
+
+6.테이블 삭제
+drop table test;
+
+7.현재상태보기
+status;
+
+8.테이블목록보기
+show tables;
+
+9.데이터베이스 목록보기
+show databases;
+
+10.테이블구조보기 
+explain tablesname;
+
+11.데이터베이스 삭제 
+drop database jsp
+
+포트번호 확인 
+
+cd dir / s my.ini
+
+
+
+http://withcoding.com/36
+출처: http://vkein.tistory.com/entry/MySQL-접속-명령어 [Vkein Programer]
+
+
+
+//기존 컬럼에 자동증가 속성 및 pk추가
+ALTER TABLE table_name MODIFY 컬럼명 INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+//기존컬럼에 자동증가 속성 추가
+ALTER TABLE 테이블명 MODIFY 컬럼명 INT NOT NULL AUTO_INCREMENT;
+//자동속성값 초기화 
+ALTER TABLE 테이블명 ADD COLUMN 컬럼명 INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+//자동속성값을 갖는 신규컬럼 추가
+ALTER TABLE 테이블 명 ADD COLUMN 컬럼명 INT NOT NULL AUTO_INCREMENT;
+//특정 컬럼뒤에 컬럼추가
+ALTER TABLE 테이블명 ADD 새로운 컬럼명 VARCHAR(10) AFTER 오래된 컬럼명
+
+
+문자열합치기
+
+http://wjheo.tistory.com/entry/MySQL-autoincrement-%ED%98%84%EC%9E%AC%EA%B0%92
+
+'character_sets_dir', 'C:\\Program Files\\MySQL\\MySQL Server 5.7\\share\\charsets\\'
+
+
+

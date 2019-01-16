@@ -1,0 +1,100 @@
+MySQL은 SQL언어를 사용하는 관계형 데이터베이스 관리 시스템
+몽고디비는 NoSQL
+
+MySQL
+
+데이터베이스는 관련성을 가지며 중복이 없는 데이터들의 집합임
+이러한 데이터베이스를 관리하는 시스템을 DBMS(데이터베이스 관리 시스템)라고 부름
+
+서버의 하드디스크나 ssd 저장매체에 데이터 저장함
+저장매체 고장 또는 사용자가 직접 데이터를 지우지 않는 이상 계속 데이터가 보존되므로 서버종료 여부와 상관없이 데이터를 계속 사용할수 있음
+또한 서버에 데이터베이스를 올리면 여러사람이 동시에 사용할수 있음
+사람들에게 각각 다른 권한을 주어 어떤사람은 읽기만 가능 어떤사람은 모든작업을 가능하게 할수 있음
+
+RDBMS  
+oracle MySQL  mssql 등이 있는데 
+실습은 MySQL
+
+설치
+
+용량이 작은 web-community
+
+서버와 
+워크벤치 만골라서 설치
+설치하다가 Use Legacy Authentication Method를 선택함
+대부분 회사가 MySQL5 버전대를 사용하고 있으므로 호환되는 모드를 사용하는게 좋음
+
+비밀번호는  알아서 설정
+
+mysql 설치 폴더 경로(bin 폴더)로 콘솔에서 이동 한뒤 
+C:\Program Files\MySQL\MySQL Server 8.0\bin>
+mysql -h localhost -u root -p 
+
+파워쉘에서 안먹히면 맨앞에 .\ 를 붙임
+들어가지면 설치완료된것
+
+워크벤치 들어가면 root 계정 커넥션 된 거 있을거임
+접속
+
+7.4 데이터베이스 및 테이블 생성
+데이터 베이스 생성
+CREATE SCHEMA 데이터베이스명
+CREATE DATABASE 데이터베이스명
+
+생성확인
+SHOW DATABASES;
+
+생성후 사용
+use 데이터베이스명
+
+테이블 생성
+CREATE TABLE nodejs.users(id INT NOT NULL AUTO_INCREMENT,
+ name VARCHAR(20) NOT NULL,
+ age INT UNSIGNED NOT NULL,
+ married TINYINT NOT NULL,
+ comment TEXT NULL,
+ created_at DATETIME NOT NULL DEFAULT now(),
+ PRIMARY KEY(id),
+ UNIQUE INDEX name_UNIQUE (name ASC)) COMMENT = '사용자 정보'
+ DEFAULT CHARSET = utf8
+ ENGINE=InnoDB;
+
+ 테이블 확인
+ desc users;
+
+ 테이블 삭제
+ drop table users;
+
+기본적인 mysql 문법은  MySQLStudy.txt 참고
+/////////////////////////////////////////////////////////////////////////////
+7.6 시퀄라이즈 사용하기 
+기본적인 문법을 숙지했다면 
+노드에서 MySQL데이터베이스에 접속해보겠음
+MySQL작업을 쉽게할수 있도록 도와주는 라이브러리가 있음
+바로 Sequelize 임
+시퀄라이즈는 ORM(Object-relational Mapping)으로 분류됨. ORM 은 자바스크립트 객체와 데이터베이스의 릴레이션을 매핑해주는 도구임
+시퀄라이즈를 MySQL하고만 같이 써야하는것은 아님
+MariaDB ,PostgreSQL, SQLite,MSSQL 등 다른 데이터베이스도 같이 쓸수 있음
+문법이 어느 정도 호환되므로 다른 SQL데이터베이스로 전환할 떄도 편리함
+시퀄라이즈를 쓰는 이유는 자바스크립트 구문을 알아서 SQL로 바꿔주기 떄문임!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+따라서 SQL언어를 직접 사용하지 않아도 자바스크립트만으로 MySQL을 조작할 수 있음
+SQL을 몰라도 MySQL을 어느정도 다룰 수 있게됨 
+SQL을 모르는 채로 시퀄라이즈를 사용하는 것을 추천하지는 않음
+
+Express-generator 로 새프로젝트를 생성하고 시퀄라이즈를 설치함
+express learn-sequelize --view=pug
+
+learn-sequelize 폴더로 이동해 npm 패키지들을 설치
+npm i
+
+이제 시퀄라이즈에 필요한 sequelize와 mysql2 패키지를 설치하겠음
+npm i sequelize mysql2
+그후 sequelize커맨드를 사용하기 위해 sequelize-cli를 전역 설치 하겠음
+npm i -g sequelize-cli
+설치 완료후 sequelize init 명령어를 호출 하면 됨
+sequelize init
+
+sequelize init 명령어 호출시 나오는 WARNING은 무시해도됨
+config , models,migrations,seeders 폴더가 생성됨 models 폴더안의 index.js 를 확인
+
+sequelize-cli 가 자동으로 생성해주는 코드는 그대로 사용했을떄 에러가 발생하고 필요없는 부분도 많으므로 다음과 같이 수정함
