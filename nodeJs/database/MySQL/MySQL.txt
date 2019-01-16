@@ -97,4 +97,32 @@ sequelize init
 sequelize init 명령어 호출시 나오는 WARNING은 무시해도됨
 config , models,migrations,seeders 폴더가 생성됨 models 폴더안의 index.js 를 확인
 
+models/ index.js
 sequelize-cli 가 자동으로 생성해주는 코드는 그대로 사용했을떄 에러가 발생하고 필요없는 부분도 많으므로 다음과 같이 수정함
+const path = require('path');
+const Sequelize = require('sequelize');
+
+const env = process.env.NODE_ENV || 'development';
+const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
+const db = {};
+
+const sequelize = new Sequelize(config.database, config.username, config.password, config);
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+module.exports = db;
+
+7.6.1 MySQL 
+이제 시퀄라이즈를 통해 익스프레스 앱과 MySQL을 연결함 
+app.js 에 추가
+
+var indexRouter = require('./routes/index');
+var userRouter = require('./routes/users');
+var sequelize = require('./models).sequelize');
+
+var app = express();
+sequelize.sync();
+
+require('./models')는 require('./models/index.js') 와 같음 
+폴더 내의 index.js파일은 require시 이름을 생략할 수 있음
+sync 메서드를 사용하면 서버 실행시 알아서 MySQL과 연동됨
