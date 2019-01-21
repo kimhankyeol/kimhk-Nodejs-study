@@ -240,3 +240,47 @@ ES2015 프로미스 문법과 강력하고 가독성이 높은 쿼리 빌더를 
 
 실습
 Express-generator 로 learn-mongoose 프로젝트를 만듬
+
+express learn-mongoose --view=pug
+//learn-mongoose 폴더로 이동해 npm패키지를 설치
+cd learn-mongoose && npm i
+
+//몽구스를 설치
+npm i mongoose
+
+8.6.1 몽고디비 연결하기
+이제 노드와 몽고디비를 몽구스를 통해 연결해보겠음
+몽고디비는 주소를 사용해 연결하기
+
+주소형식은 mongodb://[username:password@]host[:port][/[database][?option]] 과 같음
+[]부분은 있어도 되고 없어도 됨을 의미함
+username 과 password 부분은 몽고디비 계정이름과 비밀번호입력
+host가 localhost고 port가 27017 ,계정이 있는 database가 admin 주소는 mongodb://이름:비밀번호@localhost:27017/admin
+
+먼저 schema 폴더를 루트 디렉터리에 생성하고 index.js 생성후 내용넣어줌
+learn-mongoose/schemas/index.js
+작성후 
+schemas/index.js를 app.js 와 연결하여 노드 실행시 mongoose.connect 부분도 실행되도록 하겠음
+var connect = require('./schemas');
+connect();
+
+8.6.2 스키마 정의하기
+시퀄라이즈에서 테이블을 만들었던 것처럼 몽구스 스키마를 만들어봄
+schemas폴더에 user.js와 comment.js를 만듬
+
+//컬렉션 이름바꾸기
+User 이면 users 바뀌어서 나오는데 그게 싫으면
+세번쨰인자로 컬렉션 이름을 줄수 있음
+module.exports = mongoose.model('Comment',commentSchema,'comment_table');
+이러면 Comments 대신 comment_table이 나옴
+ 
+ 8.6.3 쿼리 수행하기
+ 몽구스를 사용해서 쿼리를 수정해 보겠음 
+ views 폴더안에  mongoose.pug 파일을 만듬 
+ 직접 입력하기에는 상당히 양이 많음
+ 코드 복사
+ public 폴더 안에 mongoose.js 파일도 많듬 7.6.5 public/sequelize.js 조금 다름
+
+app.js 라우터 설정 다했으면
+
+몽고디비 서버를 먼저 실행 하고 (mongod --auth)
